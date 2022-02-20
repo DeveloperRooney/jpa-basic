@@ -24,7 +24,7 @@ public class JpaMain {
             member.setId(100L);
             member.setName("HelloJPA");
 
-            // 영속 상태태
+            // 영속 상태
            em.persist(member);
 
             tx.commit();
