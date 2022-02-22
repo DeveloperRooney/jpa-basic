@@ -16,13 +16,13 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = em.find(Member.class, 200L);
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("hancoding2");
+            member.setRoleType(RoleType.ADMIN);
 
+            em.persist(member);
 
-            Member member2 = em.find(Member.class, 200L);
-
-
-            System.out.println("======= Before Commit =======");
             tx.commit();
         }catch (Exception e) {
             tx.rollback();
