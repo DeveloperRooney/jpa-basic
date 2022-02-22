@@ -15,7 +15,7 @@
             <property name="hibernate.show_sql" value="true"/> <!-- SQL show -->
             <property name="hibernate.format_sql" value="true"/> <!-- SQL 정렬 -->
             <property name="hibernate.use_sql_comments" value="true"/> <!-- SQL에 관한 주석 처리 -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
         
     </persistence-unit>
