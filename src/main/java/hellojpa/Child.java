@@ -1,9 +1,9 @@
-package hellojpa.domain;
+package hellojpa;
 
 import javax.persistence.*;
 
 @Entity
-public class Member {
+public class Child {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,8 +12,8 @@ public class Member {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    @JoinColumn(name = "PARENT_ID")
+    private Parent parent;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class Member {
         this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
+    public Parent getParent() {
+        return parent;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }

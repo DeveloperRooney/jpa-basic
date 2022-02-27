@@ -1,14 +1,13 @@
 package hellojpa;
 
-import hellojpa.domain.Item;
 import hellojpa.domain.Member;
-import hellojpa.domain.Movie;
+import hellojpa.domain.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
+import java.util.List;
 
 public class JpaMain {
 
@@ -21,12 +20,19 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUserName("KIMSUHAN");
-            member.setCreatedBy("KIM");
-            member.setCreatedDate(LocalDateTime.now());
+            Child child1 = new Child();
+            Child child2 = new Child();
+            Parent parent = new Parent();
+            parent.addCilid(child1);
+            parent.addCilid(child2);
+
+            em.persist(parent);
+
             em.flush();
             em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
 
             tx.commit();
         }catch (Exception e) {
@@ -35,5 +41,13 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static void pringMemberAndTeam(Member member) {
+        String userName = member.getName();
+        System.out.println("MEMBER NAME = " + userName);
+
+        String teamName = member.getTeam().getName();
+        System.out.println("TEAM NAME = " + teamName);
     }
 }
