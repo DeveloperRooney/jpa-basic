@@ -21,11 +21,13 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setName("hancoding");
-            member.setHomeAddress(new Address("Daejeon", "Ojeong", "10"));
-            member.setWorkPeriod(new Period());
-            em.persist(member);
+            List<Member> list = em.createQuery(
+                    "select m from Member m where m.name like '%kim$'"
+                    , Member.class
+            ).getResultList();
+            for (Member member : list) {
+                System.out.println("member = " + member.getName());
+            }
 
             tx.commit();
         }catch (Exception e) {
