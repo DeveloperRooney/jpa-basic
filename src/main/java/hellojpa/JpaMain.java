@@ -1,6 +1,8 @@
 package hellojpa;
 
+import hellojpa.domain.Address;
 import hellojpa.domain.Member;
+import hellojpa.domain.Period;
 import hellojpa.domain.Team;
 
 import javax.persistence.EntityManager;
@@ -19,20 +21,11 @@ public class JpaMain {
         tx.begin();
 
         try {
-
-            Child child1 = new Child();
-            Child child2 = new Child();
-            Parent parent = new Parent();
-            parent.addCilid(child1);
-            parent.addCilid(child2);
-
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            Member member = new Member();
+            member.setName("hancoding");
+            member.setHomeAddress(new Address("Daejeon", "Ojeong", "10"));
+            member.setWorkPeriod(new Period());
+            em.persist(member);
 
             tx.commit();
         }catch (Exception e) {
@@ -41,13 +34,5 @@ public class JpaMain {
             em.close();
         }
         emf.close();
-    }
-
-    private static void pringMemberAndTeam(Member member) {
-        String userName = member.getName();
-        System.out.println("MEMBER NAME = " + userName);
-
-        String teamName = member.getTeam().getName();
-        System.out.println("TEAM NAME = " + teamName);
     }
 }
